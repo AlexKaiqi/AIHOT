@@ -253,6 +253,22 @@
       ]
     },
     {
+      "slug": "mistral",
+      "name": "Mistral AI",
+      "group": "company",
+      "entityId": "mistral",
+      "tags": [
+        "Mistral",
+        "entity:mistral"
+      ],
+      "definition": "Mistral AI 的模型与开源动态：小尺寸高性能模型、开源权重与欧洲 AI 生态的持续追踪。",
+      "related": [
+        "small-models",
+        "open-source",
+        "model-releases"
+      ]
+    },
+    {
       "slug": "agent",
       "name": "Agent 智能体",
       "group": "field",
@@ -379,6 +395,36 @@
       ]
     },
     {
+      "slug": "small-models",
+      "name": "小模型",
+      "group": "field",
+      "tags": [
+        "小模型",
+        "端侧"
+      ],
+      "definition": "各模态的小尺寸模型：语言、视觉、语音、视频、embedding 方向的小模型发布、蒸馏与量化——同等能力下更小、更便宜、更快的前沿。",
+      "related": [
+        "on-device",
+        "model-releases",
+        "open-source"
+      ]
+    },
+    {
+      "slug": "agent-skills",
+      "name": "Agent Skills",
+      "group": "field",
+      "tags": [
+        "Agent Skills",
+        "MCP/工具调用"
+      ],
+      "definition": "可复用的智能体能力包：Agent Skills、MCP 服务、工具与工作流封装——让模型直接解决具体问题的那一层。",
+      "related": [
+        "mcp",
+        "agent",
+        "tutorials"
+      ]
+    },
+    {
       "slug": "open-source",
       "name": "开源生态",
       "group": "field",
@@ -498,7 +544,7 @@
       "tags": [
         "评测/基准"
       ],
-      "definition": "模型到底谁强：Benchmark 成绩、评测方法论争议与排行榜变化的持续记录。",
+      "definition": "模型到底谁强、谁更值：Benchmark 成绩、评测方法论争议、排行榜变化与价格/性能帕累托前沿的持续记录。",
       "related": [
         "model-releases",
         "papers",

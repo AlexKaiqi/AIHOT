@@ -1,5 +1,5 @@
 {
-  "$comment": "示范信源：首次启动时导入（scripts/seed.ts），已存在的不会被覆盖。之后在后台“信源”里增删改。字段说明见 docs/customize.md。",
+  "$comment": "示范信源：首次启动时导入（scripts/seed.ts），已存在的不会被覆盖。之后在后台“信源”里增删改。字段说明见 docs/customize.md。Anthropic/DeepSeek 没有 RSS，用 web_list 解析；每次改版后先在后台“试抓”确认。",
   "sources": [
     {
       "id": "rss-openai-news",
@@ -14,6 +14,77 @@
       "tier": "T1",
       "first_party": true,
       "owner_entity_id": "openai",
+      "participation_mode": "editorial",
+      "interval_minutes": 120,
+      "tags": [
+        "官方"
+      ],
+      "site_fulltext": false,
+      "syndicate_fulltext": false
+    },
+    {
+      "id": "web-anthropic-engineering",
+      "name": "Anthropic Engineering",
+      "kind": "web_list",
+      "config": {
+        "url": "https://www.anthropic.com/engineering",
+        "itemSelector": "a:has(h2), a:has(h3)",
+        "linkSelector": "a",
+        "titleSelector": "h2, h3",
+        "publishedAtSelector": "time",
+        "allowUrlPrefixes": [
+          "https://www.anthropic.com/engineering"
+        ],
+        "detail": {
+          "maxFetches": 20
+        },
+        "_aihot": {
+          "initialBackfillLimit": 8
+        }
+      },
+      "tier": "T1",
+      "first_party": true,
+      "owner_entity_id": "anthropic",
+      "participation_mode": "editorial",
+      "interval_minutes": 120,
+      "tags": [
+        "官方",
+        "技术文章"
+      ],
+      "site_fulltext": false,
+      "syndicate_fulltext": false
+    },
+    {
+      "id": "web-anthropic-news",
+      "name": "Anthropic News",
+      "kind": "web_list",
+      "config": {
+        "url": "https://www.anthropic.com/news",
+        "itemSelector": "a:has(h2), a:has(h3), a:has(h4)",
+        "linkSelector": "a",
+        "titleSelector": "h2, h3, h4",
+        "publishedAtSelector": "time",
+        "denyUrlPrefixes": [
+          "https://www.anthropic.com/engineering",
+          "https://www.anthropic.com/events",
+          "https://www.anthropic.com/careers",
+          "https://www.anthropic.com/company",
+          "https://www.anthropic.com/claude-corps",
+          "https://www.anthropic.com/constitution",
+          "https://www.anthropic.com/economic-futures",
+          "https://www.anthropic.com/jobs",
+          "https://www.anthropic.com/policy"
+        ],
+        "detail": {
+          "maxFetches": 20
+        },
+        "_aihot": {
+          "initialBackfillLimit": 8
+        }
+      },
+      "tier": "T1",
+      "first_party": true,
+      "owner_entity_id": "anthropic",
       "participation_mode": "editorial",
       "interval_minutes": 120,
       "tags": [
@@ -83,6 +154,50 @@
       "tags": [
         "官方",
         "开源"
+      ],
+      "site_fulltext": false,
+      "syndicate_fulltext": false
+    },
+    {
+      "id": "rss-qwen-blog",
+      "name": "Qwen Blog",
+      "kind": "rss",
+      "config": {
+        "feedUrl": "https://qwenlm.github.io/blog/index.xml",
+        "_aihot": {
+          "initialBackfillLimit": 8
+        }
+      },
+      "tier": "T1",
+      "first_party": true,
+      "owner_entity_id": "qwen",
+      "participation_mode": "editorial",
+      "interval_minutes": 120,
+      "tags": [
+        "官方",
+        "开源"
+      ],
+      "site_fulltext": false,
+      "syndicate_fulltext": false
+    },
+    {
+      "id": "web-deepseek-updates",
+      "name": "DeepSeek Updates",
+      "kind": "web_list",
+      "config": {
+        "url": "https://api-docs.deepseek.com/updates",
+        "parseMode": "docusaurus_changelog",
+        "_aihot": {
+          "initialBackfillLimit": 5
+        }
+      },
+      "tier": "T1",
+      "first_party": true,
+      "owner_entity_id": "deepseek",
+      "participation_mode": "editorial",
+      "interval_minutes": 120,
+      "tags": [
+        "官方"
       ],
       "site_fulltext": false,
       "syndicate_fulltext": false
@@ -185,7 +300,7 @@
       },
       "tier": "T1",
       "first_party": true,
-      "owner_entity_id": null,
+      "owner_entity_id": "mistral",
       "participation_mode": "editorial",
       "interval_minutes": 120,
       "tags": [
@@ -211,6 +326,93 @@
       "interval_minutes": 180,
       "tags": [
         "研究"
+      ],
+      "site_fulltext": false,
+      "syndicate_fulltext": false
+    },
+    {
+      "id": "rss-hf-daily-papers",
+      "name": "Hugging Face Daily Papers（社区镜像）",
+      "kind": "rss",
+      "config": {
+        "feedUrl": "https://papers.takara.ai/api/feed",
+        "_aihot": {
+          "initialBackfillLimit": 5
+        }
+      },
+      "tier": "T2",
+      "first_party": false,
+      "owner_entity_id": null,
+      "participation_mode": "editorial",
+      "interval_minutes": 180,
+      "tags": [
+        "论文",
+        "第三方镜像"
+      ],
+      "site_fulltext": false,
+      "syndicate_fulltext": false
+    },
+    {
+      "id": "rss-arxiv-cs-lg",
+      "name": "arXiv cs.LG",
+      "kind": "rss",
+      "config": {
+        "feedUrl": "https://rss.arxiv.org/rss/cs.LG",
+        "_aihot": {
+          "initialBackfillLimit": 5
+        }
+      },
+      "tier": "T2",
+      "first_party": false,
+      "owner_entity_id": null,
+      "participation_mode": "editorial",
+      "interval_minutes": 240,
+      "tags": [
+        "论文",
+        "预印本"
+      ],
+      "site_fulltext": false,
+      "syndicate_fulltext": false
+    },
+    {
+      "id": "rss-interconnects",
+      "name": "Interconnects (Nathan Lambert)",
+      "kind": "rss",
+      "config": {
+        "feedUrl": "https://www.interconnects.ai/feed",
+        "_aihot": {
+          "initialBackfillLimit": 8
+        }
+      },
+      "tier": "T2",
+      "first_party": false,
+      "owner_entity_id": null,
+      "participation_mode": "editorial",
+      "interval_minutes": 180,
+      "tags": [
+        "个人",
+        "周刊"
+      ],
+      "site_fulltext": false,
+      "syndicate_fulltext": false
+    },
+    {
+      "id": "rss-ahead-of-ai",
+      "name": "Ahead of AI (Sebastian Raschka)",
+      "kind": "rss",
+      "config": {
+        "feedUrl": "https://magazine.sebastianraschka.com/feed",
+        "_aihot": {
+          "initialBackfillLimit": 8
+        }
+      },
+      "tier": "T2",
+      "first_party": false,
+      "owner_entity_id": null,
+      "participation_mode": "editorial",
+      "interval_minutes": 180,
+      "tags": [
+        "个人"
       ],
       "site_fulltext": false,
       "syndicate_fulltext": false

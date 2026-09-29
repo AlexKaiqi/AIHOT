@@ -32,11 +32,11 @@ export const CATEGORY_TAGS = [
 
 /** 可选的主题标签。 */
 export const TOPIC_TAGS = [
-  "Agent", "编码", "推理", "多模态", "语音", "视频", "图像生成", "RAG", "端侧", "数据/训练", "搜索", "部署/工程", "开源生态", "具身智能", "MCP/工具调用",
+  "Agent", "Agent Skills", "编码", "推理", "多模态", "语音", "视频", "图像生成", "RAG", "端侧", "小模型", "数据/训练", "搜索", "部署/工程", "开源生态", "具身智能", "MCP/工具调用",
 ] as const;
 
 /** 可选的实体标签（公司、机构、平台）。 */
-export const ENTITY_TAGS = ["OpenAI", "Anthropic", "DeepSeek", "DeepMind", "Google", "Meta", "Microsoft", "xAI", "Hugging Face", "GitHub", "arXiv"] as const;
+export const ENTITY_TAGS = ["OpenAI", "Anthropic", "DeepSeek", "DeepMind", "Google", "Meta", "Microsoft", "xAI", "Mistral", "Qwen", "Hugging Face", "GitHub", "arXiv"] as const;
 
 /** 模型常写的近义词，统一成词表里的写法。 */
 export const TAG_SYNONYMS: Readonly<Record<string, string>> = {
@@ -70,6 +70,7 @@ export const ENTITIES: Record<string, { name: string; displayTag: string | null;
   minimax: { name: "MiniMax", displayTag: null, aliases: ["MiniMax", "海螺"] },
   zhipu: { name: "智谱 GLM", displayTag: null, aliases: ["智谱", "GLM", "Z.ai"] },
   xai: { name: "xAI", displayTag: "xAI", aliases: ["xAI", "Grok"] },
+  mistral: { name: "Mistral AI", displayTag: "Mistral", aliases: ["Mistral", "Mixtral"] },
   meta: { name: "Meta", displayTag: "Meta", aliases: ["Meta", "Llama"] },
   microsoft: { name: "Microsoft", displayTag: "Microsoft", aliases: ["Microsoft", "微软", "Copilot"] },
   nvidia: { name: "NVIDIA", displayTag: null, aliases: ["NVIDIA", "英伟达"] },
@@ -127,7 +128,9 @@ export const PUBLISHER_DOMAINS: ReadonlyArray<{ entityId: string; domains: reado
   { entityId: "meta", domains: ["ai.meta.com"] },
   { entityId: "microsoft", domains: ["microsoft.com"] },
   { entityId: "nvidia", domains: ["nvidia.com"] },
-  { entityId: "qwen", domains: ["qwen.ai"] },
+  { entityId: "qwen", domains: ["qwen.ai", "qwenlm.github.io"] },
+  { entityId: "zhipu", domains: ["z.ai", "bigmodel.cn"] },
+  { entityId: "mistral", domains: ["mistral.ai"] },
   { entityId: "cursor", domains: ["cursor.com"] },
   { entityId: "openrouter", domains: ["openrouter.ai"] },
 ];
