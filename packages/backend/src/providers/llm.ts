@@ -80,6 +80,12 @@ export const MODELS: Record<string, ModelSpec> = {
     baseUrlEnv: "DASHSCOPE_BASE_URL", apiKeyEnv: "DASHSCOPE_API_KEY",
     extra: { enable_thinking: false }, jsonMode: false, vision: true,
   },
+  // TypeSafe Jev: a judgment model (closed choice/score questions, no text generation). Only the
+  // prefilter step runs it (providers/jev.ts); chatJson refuses the service for any other step.
+  "jev-latest": {
+    key: "jev-latest", service: "typesafe", model: "jev-latest",
+    baseUrlEnv: "TYPESAFE_BASE_URL", apiKeyEnv: "TYPESAFE_API_KEY", jsonMode: false,
+  },
 };
 
 export type ContentPart = { type: "text"; text: string } | { type: "image_url"; image_url: { url: string } };
@@ -154,6 +160,7 @@ function isConnectFailure(error: unknown): boolean {
 export async function chatJson<S extends z.ZodType>(opts: ChatJsonOptions<S>): Promise<ChatJsonResult<z.infer<S>>> {
   const spec = MODELS[opts.model];
   if (!spec) throw new Error(`Unknown model ${opts.model}`);
+  if (spec.service === "typesafe") throw new Error(`Model ${opts.model} runs on the TypeSafe judgment API, which only the prefilter step supports (PREFILTER_MODEL)`);
   if (!config.modelCallsEnabled) throw new Error("Model calls are disabled (MODEL_CALLS_ENABLED=false)");
   const baseUrl = credential("models", spec.baseUrlEnv);
   const apiKey = credential("models", spec.apiKeyEnv);

@@ -14,6 +14,7 @@ import { CATEGORIES } from "@aihot/industry/taxonomy";
 import { SELECTION } from "@aihot/industry/selection";
 import { sql } from "../db.ts";
 import { chatJson, MODELS, type ContentPart } from "../providers/llm.ts";
+import { jevPrefilter } from "../providers/jev.ts";
 import { completeReceipt, ProviderRejectedError } from "../providers/receipts.ts";
 import { collapseWhitespace } from "../lib/text.ts";
 import { modelFor } from "./models.ts";
@@ -194,6 +195,14 @@ const tagged = (attemptTag: string | undefined, step: string) => [attemptTag, st
 async function runPrefilter(a: AnalyzeInputArticle, opts: StepOpts): Promise<AnalysisRun["prefilter"]> {
   const model = await modelFor("prefilter");
   checkAnalysisRunning();
+  const spec = MODELS[model];
+  if (spec?.service === "typesafe") {
+    // TypeSafe Jev: the prefilter as one closed three-way choice with probabilities (providers/jev.ts).
+    const res = await jevPrefilter({ spec, state: prefilterUser(a), standard: PREFILTER_SYSTEM, promptVersion: PROMPT_VERSIONS.prefilter, subject: subjectOf(a), attemptTag: opts.attemptTag });
+    // A BLOCK without material to back it counts as UNKNOWN (which goes on).
+    const label = res.label === "BLOCK" && missingEvidence(a) ? "UNKNOWN" : res.label;
+    return { label, reason: res.reason, model: res.model, receiptId: res.receiptId, reused: res.reused };
+  }
   const res = await chatJson({
     model,
     purpose: "prefilter_article",
