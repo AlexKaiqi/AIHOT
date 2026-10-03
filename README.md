@@ -1,3 +1,11 @@
+# Pareto
+
+本地项目由 AIHOT 框架派生，用于 AI 前沿阅读、精选与日报。站点身份以 [industry/site.ts](industry/site.ts) 为准；精选标准与校准从 [docs/selection.md](docs/selection.md) 进入，运行与部署从 [docs/deploy.md](docs/deploy.md) 进入，修改前读 [AGENTS.md](AGENTS.md)。
+
+以下保留上游框架说明与署名背景。其演示站、截图、性能数据和原仓库获取命令属于上游；获取上游框架不包含本地 Pareto 定制，也不证明本地部署或精选质量已验收。
+
+## 上游 AIHOT 框架说明
+
 <p align="center">
   <picture>
     <source media="(prefers-color-scheme: dark)" srcset="docs/assets/banner-dark.png">
